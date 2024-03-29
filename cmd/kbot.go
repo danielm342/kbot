@@ -46,13 +46,17 @@ to quickly create a Cobra application.`,
 		}
 
 		kbot.Handle(telebot.OnText, func(m telebot.Context) error {
-			
+
 			log.Print(m.Message().Payload, m.Text())
 			payload := m.Message().Payload
 
 			switch payload {
 			case "hello":
 				err = m.Send(fmt.Sprintf("Hello I'm Kbot %s!", appVersion))
+			case "how are you?":
+				err = m.Send(("I`m fine"))
+			case "tell me a joke":
+				err = m.Send(("Why is it so hard to find DevOps professionals on Mars?\n\nThere's no Terraform there yet."))
 			}
 
 			return err
@@ -65,14 +69,4 @@ to quickly create a Cobra application.`,
 
 func init() {
 	rootCmd.AddCommand(kbotCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// kbotCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// kbotCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
