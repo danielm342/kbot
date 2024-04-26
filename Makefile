@@ -41,4 +41,5 @@ push:
 	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
 
 clean:
-	rm -rf gbot && docker image rm ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
+	rm -rf kbot
+	docker rmi ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
