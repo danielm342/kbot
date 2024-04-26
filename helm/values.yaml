@@ -5,7 +5,7 @@
 replicaCount: 1
 image:
   repository: danielm342
-  tag: "v1.0.7-273cd22"
+  tag: "v1.0.7-5d08dd1"
   arch: amd64
   os: linux
   registry: ghcr.io
