@@ -5,8 +5,10 @@
 replicaCount: 1
 image:
   repository: danielm342
-  tag: "v1.0.7-273cd22"
+  tag: "v1.0.7-e72e0ce"
   arch: amd64
+  os: linux
+  registry: ghcr.io
 secret:
   name: "kbot"
   env: "TELE_TOKEN"
