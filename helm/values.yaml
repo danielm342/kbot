@@ -5,7 +5,7 @@
 replicaCount: 1
 image:
   repository: danielm342
-  tag: "v1.0.7-e23f79a"
+  tag: "v1.0.7-273cd22"
   arch: amd64
 secret:
   name: "kbot"
