@@ -26,14 +26,18 @@ jobs:
         run: make test
 
       # Build & Push
-      - name: Docker Hub Login
-        run: echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-     
-      - name: Build
-        run: make image REGISTRY=$REGISTRY${{ github.repository_owner }}
+      - name: Login to GIT HUB
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.TOKEN }}
 
-      - name: Push
-        run: make push REGISTRY=$REGISTRY${{ github.repository_owner }}
+      - name: Build image
+        run: make image
+
+      - name: Push image
+        run: make push  
 
   cd:
     name: CD
