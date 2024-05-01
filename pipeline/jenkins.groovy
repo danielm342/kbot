@@ -49,7 +49,7 @@ pipeline {
               steps {
                 echo 'push to registry'
                 script {
-                    docker.withRegistry('', 'dockerHub') {
+                    docker.withRegistry('', 'dockerhub') {
                           sh 'make push'
                       }
                 }
