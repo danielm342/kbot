@@ -1,64 +1,46 @@
 pipeline {
     agent any
     parameters {
-
         choice(name: 'OS', choices: ['linux', 'darwin', 'windows', 'all'], description: 'Pick OS')
-        choice(name: 'ARCH', choices: ['amd64', 'arm64', 'x86'], description: 'Pick Arch')
-
+        choice(name: 'Arch', choices: ['amd64', 'arm64'], description: 'Pick Arch')
     }
-    environment {
-        REPO = 'https://github.com/danielm342/kbot'
-        BRANCH = 'main'
-)
     stages {
-        
-        stage('Example') {
+        stage('clone') {
             steps {
-                echo "Build for platform ${params.OS}"
-
-                echo "Build for arch: ${params.ARCH}"
-
+                echo 'cone repository'
+                git branch: "${BRANCH}", url : "${REPO}"
             }
         }
-        
-        stage("clone") {
+
+        stage('test') {
             steps {
-            echo 'CLONE REPOSITORY'
-                git branch: "${BRANCH}", url: "${REPO}"
-            }
-        }
-        
-        stage("test") {
-            steps {
-                echo 'TEST EXECUTION STARTED'
+                echo "start testing"
                 sh 'make test'
             }
         }
-        
-        stage("build") {
+
+        stage('build') {
             steps {
-                echo 'BUILD EXECUTION STARTED'
+                echo "build app"
                 sh 'make build'
             }
         }
-        
-        stage("image") {
-            steps {
-                script {
-                    echo 'BUILD EXECUTION STARTED'
-                    sh 'make image'
-                }
-            }
+        stage('image') {
+             steps {
+                echo "build docker image"
+                sh 'make image'
+             }
         }
-        
-        stage("push") {
-            steps {
+
+        stage('push') {
+              steps {
+                echo 'push to registry'
                 script {
-                    docker.withRegistry( '', 'dockerhub' ) {
-                    sh 'make push'
-                    }
+                    docker.withRegistry('', 'dockerHub') {
+                          sh 'make push'
+                      }
                 }
-            }
+              }
         }
     }
 }
