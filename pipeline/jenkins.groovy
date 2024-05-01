@@ -1,16 +1,17 @@
 pipeline {
     agent any
-    environment {
-        REPO = 'https://github.com/danielm342/kbot'
-        BRANCH = 'main'
-)
     parameters {
 
         choice(name: 'OS', choices: ['linux', 'darwin', 'windows', 'all'], description: 'Pick OS')
         choice(name: 'ARCH', choices: ['amd64', 'arm64', 'x86'], description: 'Pick Arch')
 
     }
+    environment {
+        REPO = 'https://github.com/danielm342/kbot'
+        BRANCH = 'main'
+)
     stages {
+        
         stage('Example') {
             steps {
                 echo "Build for platform ${params.OS}"
