@@ -14,10 +14,10 @@ pipeline {
             }
         }
         
-        ('clone') {
+       stage("clone") {
             steps {
-                echo 'cone repository'
-                git branch: "${BRANCH}", url : "${REPO}"
+            echo 'CLONE REPOSITORY'
+                git branch: "${BRANCH}", url: "${REPO}"
             }
         }
 
